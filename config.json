@@ -1,5 +1,5 @@
 {
-  "browser": "Firefox",
+  "browser": "Chrome",
   "implicit_wait": 10,
   "target_url": "https://news.ycombinator.com/"
 }
