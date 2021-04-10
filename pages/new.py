@@ -3,7 +3,7 @@ This module contains NewPage,
 the page object for Hacker News new page
 """
 
-from pages.base_page import BasePage
+from pages.basepage import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 

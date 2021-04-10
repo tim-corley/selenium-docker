@@ -4,7 +4,7 @@ the page object for the Hacker News login / signup page
 """
 import os
 from dotenv import load_dotenv
-from pages.base_page import BasePage
+from pages.basepage import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 

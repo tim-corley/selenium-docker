@@ -1,5 +1,5 @@
 {
-  "browser": "Chrome",
+  "browser": "Chrome Local",
   "implicit_wait": 10,
   "target_url": "https://news.ycombinator.com/"
 }
