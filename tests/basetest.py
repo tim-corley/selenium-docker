@@ -1,38 +1,39 @@
 import pytest
 
-@pytest.mark.usefixtures("setup")
-class LoggedOutTest:
-    pass
-
+# use for navbar and submit page tests
 @pytest.mark.usefixtures("account_setup")
 class LoggedInTest:
     pass
 
-@pytest.mark.usefixtures("account_setup", "nav_new")
-class UserNewTest:
+@pytest.mark.usefixtures("setup")
+class HomeTest:
     pass
 
-@pytest.mark.usefixtures("account_setup", "nav_past")
-class UserPastTest:
+@pytest.mark.usefixtures("setup", "nav_new")
+class NewTest:
     pass
 
-@pytest.mark.usefixtures("account_setup", "nav_comments")
-class UserCommentsTest:
+@pytest.mark.usefixtures("setup", "nav_past")
+class PastTest:
     pass
 
-@pytest.mark.usefixtures("account_setup", "nav_ask")
-class UserAskTest:
+@pytest.mark.usefixtures("setup", "nav_comments")
+class CommentsTest:
     pass
 
-@pytest.mark.usefixtures("account_setup", "nav_show")
-class UserShowTest:
+@pytest.mark.usefixtures("setup", "nav_ask")
+class AskTest:
     pass
 
-@pytest.mark.usefixtures("account_setup", "nav_jobs")
-class UserJobsTest:
+@pytest.mark.usefixtures("setup", "nav_show")
+class ShowTest:
     pass
 
-@pytest.mark.usefixtures("account_setup", "nav_submit")
-class UserSubmitTest:
+@pytest.mark.usefixtures("setup", "nav_jobs")
+class JobsTest:
+    pass
+
+@pytest.mark.usefixtures("setup", "nav_submit")
+class SubmitTest:
     pass
 

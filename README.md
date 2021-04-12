@@ -44,3 +44,13 @@ python -m pytest
 ```
 docker logs grid_docker_demo_firefox_1
 ```
+
+#### Scaling
+
+Spin up 3 Chrome containers (with 4 browser instances each as noted in the `docker-compose.yml` file):
+
+```
+$ docker-compose up -d --scale chrome=3
+```
+
+make sure that `browser` is set to "Chrome Remote" in your config file
