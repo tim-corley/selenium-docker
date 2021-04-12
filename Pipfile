@@ -9,6 +9,7 @@ pytest = "*"
 python-dotenv = "*"
 delayed-assert = "*"
 pytest-xdist = "*"
+pytest-rerunfailures = "*"
 
 [dev-packages]
 

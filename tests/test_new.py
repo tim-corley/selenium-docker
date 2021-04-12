@@ -10,7 +10,7 @@ from pages.new import NewPage
 
 class TestLoggedinNewPage(UserNewTest):
 
-    def test_NewPostIsNew(self):
+    def test_TopPostNewest(self):
         new_page = NewPage(self.driver)
         expect(new_page.verify_recent_post())
         assert_expectations()

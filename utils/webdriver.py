@@ -25,7 +25,7 @@ class WebDriverInstance:
             opts = webdriver.FirefoxOptions()
             opts.headless = True
             wd = webdriver.Remote(
-            command_executor='http://localhost:4444/wd/hub',
+            command_executor=(config['selenium_hub']),
             desired_capabilities = DesiredCapabilities.FIREFOX,
             options=opts)
         elif config['browser'] == 'Chrome Local':
@@ -35,7 +35,7 @@ class WebDriverInstance:
         elif config['browser'] == 'Chrome Remote':
             opts = webdriver.ChromeOptions()
             opts.add_argument('headless')
-            wd = webdriver.Remote('http://localhost:4444/wd/hub', opts.to_capabilities())
+            wd = webdriver.Remote(config['selenium_hub'], opts.to_capabilities())
         else:
             raise Exception(f'The "{config["browser"]}" browser is not supported.')
         wd.get(config['target_url'])

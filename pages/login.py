@@ -4,30 +4,27 @@ the page object for the Hacker News login / signup page
 """
 import os
 from dotenv import load_dotenv
-from pages.basepage import BasePage
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+from utils.wrapper import PageObject, HTMLElement
 
 
-class LoginPage(BasePage):
+class LoginPage(PageObject):
     load_dotenv()
-    USERNAME_INPUT = (By.CSS_SELECTOR, 'input[name="acct"]')
-    PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[name="pw"]')
-    LOGIN_BUTTON = (By.CSS_SELECTOR, 'input[value="login"]')
+    username_input = HTMLElement(css='input[name="acct"]')
+    password_input = HTMLElement(css='input[name="pw"]')
+    login_button = HTMLElement(css='input[value="login"]')
     USERNAME = os.getenv('USERNAME')
     PASSWORD = os.getenv('PASSWORD')
 
-    def __init__(self, browser):
-        self.browser = browser
+    def __init__(self, webdriver):
+        # super().__init__(browser)
+        self.webdriver = webdriver
 
     def input_login_credentials(self):
-        username_input = self.browser.find_element(*self.USERNAME_INPUT)
-        password_input = self.browser.find_element(*self.PASSWORD_INPUT)
-        username_input.send_keys(self.USERNAME + Keys.TAB)
-        password_input.send_keys(self.PASSWORD)
+        self.username_input.send_keys(self.USERNAME)
+        self.password_input.send_keys(self.PASSWORD)
 
     def click_login_button(self):
-        self.browser.find_element(*self.LOGIN_BUTTON).click()
+        self.login_button.click()
 
     def user_login(self):
         self.input_login_credentials()

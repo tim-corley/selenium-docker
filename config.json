@@ -1,5 +1,6 @@
 {
-  "browser": "Chrome Local",
+  "browser": "Chrome Remote",
   "implicit_wait": 10,
-  "target_url": "https://news.ycombinator.com/"
+  "target_url": "https://news.ycombinator.com/",
+  "selenium_hub": "http://localhost:4444/wd/hub"
 }

@@ -3,17 +3,15 @@ This module contains HomePage,
 the page object for Hacker News home page
 """
 
-from pages.basepage import BasePage
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+from utils.wrapper import PageObject, HTMLElement
 
 
-class HomePage(BasePage):
+class HomePage(PageObject):
 
-    POST_LISTING = (By.CSS_SELECTOR, 'table.itemlist')
+    posts_table = HTMLElement(css='table.itemList')
 
-    def __init__(self, browser):
-        self.browser = browser
+    def __init__(self, webdriver):
+        self.webdriver = webdriver
 
     def verify_posts_displayed(self):
-        return self.browser.find_element(*self.POST_LISTING).is_displayed()
+        return self.posts_table.is_displayed()

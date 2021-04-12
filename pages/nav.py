@@ -5,61 +5,60 @@ the page object for Hacker News top navigation bar component
 
 import os
 from dotenv import load_dotenv
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+from utils.wrapper import PageObject, HTMLElement
 
 
-class NavBar:
 
+class NavBar(PageObject):
     load_dotenv()
+    menu_header = HTMLElement(css='b.hnname')
+    login_link = HTMLElement(css='a[href="login?goto=news"]')
+    logout_link = HTMLElement(id_='logout')
+    username_link = HTMLElement(id_='me')
+    nav_home = HTMLElement(css='a[href="news"]')
+    nav_new = HTMLElement(css='a[href="newest"]')
+    nav_past = HTMLElement(css='a[href="front"]')
+    nav_comments = HTMLElement(css='a[href="newcomments"]')
+    nav_ask = HTMLElement(css='a[href="ask"]')
+    nav_show = HTMLElement(css='a[href="show"]')
+    nav_jobs = HTMLElement(css='a[href="jobs"]')
+    nav_submit = HTMLElement(css='a[href="submit"]')
     USERNAME = os.getenv('USERNAME')
-    MENU_HEADER = (By.CSS_SELECTOR, 'b.hnname')
-    LOGIN_LINK = (By.CSS_SELECTOR, 'a[href="login?goto=news"]')
-    LOGOUT_LINK = (By.ID, 'logout')
-    USERNAME_LINK = (By.ID, 'me')
-    NAV_HOME = (By.CSS_SELECTOR, 'a[href="news"]')
-    NAV_NEW = (By.CSS_SELECTOR, 'a[href="newest"]')
-    NAV_PAST = (By.CSS_SELECTOR, 'a[href="front"]')
-    NAV_COMMENTS = (By.CSS_SELECTOR, 'a[href="newcomments"]')
-    NAV_ASK = (By.CSS_SELECTOR, 'a[href="ask"]')
-    NAV_SHOW = (By.CSS_SELECTOR, 'a[href="show"]')
-    NAV_JOBS = (By.CSS_SELECTOR, 'a[href="jobs"]')
-    NAV_SUBMIT = (By.CSS_SELECTOR, 'a[href="submit"]')
 
-    def __init__(self, browser):
-        self.browser = browser
+    def __init__(self, webdriver):
+        self.webdriver = webdriver
 
     def verify_menu_header_displayed(self):
-        return self.browser.find_element(*self.MENU_HEADER).is_displayed()
+        return self.menu_header.is_displayed()
 
     def verify_username_displayed(self):
-        return self.browser.find_element(*self.USERNAME_LINK).is_displayed() and self.browser.find_element(*self.USERNAME_LINK).text == self.USERNAME
+        return self.username_link.is_displayed() and self.username_link.text == self.USERNAME
 
     def click_login(self):
-        self.browser.find_element(*self.LOGIN_LINK).click()
+        self.login_link.click()
 
     def click_logout(self):
-        self.browser.find_element(*self.LOGOUT_LINK).click()
+        self.logout_link.click()
 
     # select item
     def navigate_to_page(self, page):
         if page == 'home':
-            self.browser.find_element(*self.NAV_HOME).click()
+            self.nav_home.click()
         elif page == 'new':
-            self.browser.find_element(*self.NAV_NEW).click()
+            self.nav_new.click()
         elif page == 'past':
-            self.browser.find_element(*self.NAV_PAST).click()
+            self.nav_past.click()
         elif page == 'comments':
-            self.browser.find_element(*self.NAV_COMMENTS).click()
+            self.nav_comments.click()
         elif page == 'ask':
-            self.browser.find_element(*self.NAV_ASK).click()
+            self.nav_ask.click()
         elif page == 'show':
-            self.browser.find_element(*self.NAV_SHOW).click()
+            self.nav_show.click()
         elif page == 'jobs':
-            self.browser.find_element(*self.NAV_JOBS).click()
+            self.nav_jobs.click()
         elif page == 'submit':
-            self.browser.find_element(*self.NAV_SUBMIT).click()
+            self.nav_submit.click()
         elif page == 'login':
-            self.browser.find_element(*self.LOGIN_LINK).click()
+            self.login_link.click()
         else:
             print('no page found.')

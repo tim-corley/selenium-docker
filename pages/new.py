@@ -3,33 +3,32 @@ This module contains NewPage,
 the page object for Hacker News new page
 """
 
-from pages.basepage import BasePage
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+from utils.wrapper import PageObject, HTMLElement, HTMLElementList
 
 
-class NewPage(BasePage):
+class PostItem(HTMLElementList):
+    post_age = HTMLElement(css='span.age')
 
-    POST_TABLE = (By.CSS_SELECTOR, 'table.itemlist')
-    POST_ROW = (By.TAG_NAME, 'tr')
-    POST_DATA = (By.CSS_SELECTOR, 'td.subtext')
-    POST_TIME = (By.CSS_SELECTOR, 'span.age')
 
-    def __init__(self, browser):
-        self.browser = browser
+class NewPage(PageObject):
+    # gets all rows from posts table
+    post_rows = PostItem(xpath='//*[@id="hnmain"]/tbody/tr[3]/td/table/tbody/tr')
+
+    def __init__(self, webdriver):
+        self.webdriver = webdriver
 
     def verify_posts_displayed(self):
-        return self.browser.find_element(*self.POST_TABLE).is_displayed()
+        return self.post_table.is_displayed()
 
+    # returns first two rows (header, subtitle) from the posts table
     def get_newest_post(self):
-        table = self.browser.find_element(*self.POST_TABLE)
-        rows = table.find_elements(*self.POST_ROW)
-        return rows[:2]
+        return self.post_rows[:2]
 
     # returns true if post < 5 minutes old
     def verify_recent_post(self):
         subtext = self.get_newest_post()[1]
-        subtext_data = subtext.find_element(*self.POST_DATA)
-        data_age = subtext_data.find_element(*self.POST_TIME).text.split(' ')[0]
-        print(f'\n\nPOST AGE: {data_age}')
+        data_age = subtext.post_age.text.split(' ')[0]
         return int(data_age) < 5
+
+    # todo add a method that compares top post time vs. rest of posts
+    # verify that top post time <= all others
