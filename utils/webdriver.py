@@ -3,6 +3,9 @@ import json
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from utils.logger import Logger, info
+
+logger = Logger().get_logger()
 
 class WebDriverInstance:
 
@@ -37,7 +40,9 @@ class WebDriverInstance:
             opts.add_argument('headless')
             wd = webdriver.Remote(config['selenium_hub'], opts.to_capabilities())
         else:
-            raise Exception(f'The "{config["browser"]}" browser is not supported.')
+            error(logger, f'The browser is not supported.')
+            # raise Exception(f'The "{config['browser']}" browser is not supported.')
         wd.get(config['target_url'])
+        info(logger, 'initializing {} & fetching: {}'.format(config['browser'], config['target_url']))
         return wd
 

@@ -5,6 +5,9 @@ the page object for the Hacker News login / signup page
 import os
 from dotenv import load_dotenv
 from utils.wrapper import PageObject, HTMLElement
+from utils.logger import Logger, info
+
+logger = Logger().get_logger()
 
 
 class LoginPage(PageObject):
@@ -22,9 +25,11 @@ class LoginPage(PageObject):
     def input_login_credentials(self):
         self.username_input.send_keys(self.USERNAME)
         self.password_input.send_keys(self.PASSWORD)
+        info(logger, 'successfully input username & password')
 
     def click_login_button(self):
         self.login_button.click()
+        info(logger, 'clicked login button')
 
     def user_login(self):
         self.input_login_credentials()
