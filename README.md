@@ -1,4 +1,16 @@
+### Install
+```
+git clone
+cd project_dir
+pipenv install
+```
 ### Run Locally
+ - run all tests with parallelization support (2 threads) and automatically rerun failed tests (up to two times)
+```
+python -m pytest -n 2 --reruns 2
+```
+
+ - after tests run is completed, a result report can be viewed at: `./logs/pytest_html_report.html`
 
 ### Run Remotely
 
@@ -18,7 +30,7 @@ $ docker pull selenium/node-firefox-debug
 docker-compose up -d
 ```
    
-2) Check that hub was successfully started by going to: (http://localhost:4444/grid/console)[http://localhost:4444/grid/console]
+2) Check that hub was successfully started by going to: [http://localhost:4444/grid/console](http://localhost:4444/grid/console)
 
 3) **Configure the test run**
 Use `config.json` to determine test type (local vs. remote) and brower (Firefox or Chrome)
@@ -28,7 +40,7 @@ Use `config.json` to determine test type (local vs. remote) and brower (Firefox 
 python -m pytest
 ```
 
-If issues, check logs:
+*if issues, check container logs:*
 ```
 docker logs grid_docker_demo_firefox_1
 ```

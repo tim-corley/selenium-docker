@@ -1,5 +1,5 @@
 {
-  "browser": "Chrome Local",
+  "browser": "Firefox Local",
   "implicit_wait": 10,
   "target_url": "https://news.ycombinator.com/",
   "selenium_hub": "http://localhost:4444/wd/hub",
